@@ -1,0 +1,8 @@
+{
+  "name": "OCR_MobileApp",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
