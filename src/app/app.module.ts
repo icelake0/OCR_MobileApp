@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { CameraPage } from '../pages/camera/camera';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ViewTextPage } from '../pages/view-text/view-text'
@@ -21,10 +21,11 @@ import { IonicStorageModule } from '@ionic/storage';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
+    CameraPage,
     HomePage,
     TabsPage,
-    ViewTextPage
+    ViewTextPage,
+
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,7 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
+    CameraPage,
     HomePage,
     TabsPage,
     ViewTextPage
