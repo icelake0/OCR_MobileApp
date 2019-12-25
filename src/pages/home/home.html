@@ -1,17 +1,47 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      HRWTTS
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-card>
+    <ion-card-header>
+    File Name
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small (click)="openDetails()">
+          <ion-icon name="eye"></ion-icon>
+          <div>view</div>
+          
+          
+         
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+            <ion-icon name="play"></ion-icon>
+            <div>Listen</div>
+        </button>
+      </ion-col>
+
+      <ion-col>
+          <button ion-button icon-start clear small>
+              <ion-icon name="trash"></ion-icon>
+              <div>Delete</div>
+          </button>
+        </ion-col>
+    
+    </ion-row>
+  
+  </ion-card>
 </ion-content>
