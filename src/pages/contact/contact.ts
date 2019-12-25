@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageToTextProvider } from '../../providers/image-to-text/image-to-text';
 import { HelperProvider } from '../../providers/helper/helper'
+import { Storage } from '@ionic/storage';
+import { HomePage } from '../home/home'
 
 
 @Component({
@@ -14,7 +16,8 @@ export class ContactPage {
   constructor(public navCtrl: NavController, 
               private camera: Camera, 
               private imageToTextProvider : ImageToTextProvider,
-              private helper : HelperProvider
+              private helper : HelperProvider,
+              private storage : Storage,
               ) {}
   ionViewWillEnter(){
     const options: CameraOptions = {
@@ -32,13 +35,28 @@ export class ContactPage {
         this.helper.loading.dismiss();
         this.helper.showAlert('debug : we hot the test');
         console.log(JSON.stringify(res));
-
-        // this.storage.set('auth', this.authProvider.auth).then((res)=>{
-        //   //inform the app.component to load auth form storage
-        //   this.events.publish('user:signin_signinout');
-        // })
-        // console.log(JSON.stringify(res))
-  
+        if(res.text){
+          let today = new Date()
+          let today_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+          let today_time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+          let createdAt = `${today_date} ${today_time}`
+          let new_text = {
+            'createdAt' : createdAt,
+            'id' : '_' + Math.random().toString(36).substr(2, 9) + today.getTime(),
+            'content' : res.text
+          }
+          this.storage.get('saved_text').then((savedTexts) => {
+            if(!savedTexts){
+              savedTexts = [];
+            }
+            savedTexts.unshift(new_text);
+            console.log('The storage saved_text', JSON.stringify(savedTexts));
+            this.storage.set('saved_text', savedTexts).then((res)=>{
+              console.log('we are now in storage')
+              this.navCtrl.push(HomePage);
+            })
+          });
+        }
       },err=>{
         this.helper.loading.dismiss();
         console.log(JSON.stringify(err))
