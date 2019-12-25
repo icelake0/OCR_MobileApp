@@ -45,4 +45,8 @@ export class HelperProvider {
     return moment(time).format("Do MMMM, YYYY. HH:mm A") 
   }
 
+  getSubString(text){
+    return text.substring(0, 200);
+  }
+
 }

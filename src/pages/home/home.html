@@ -14,7 +14,7 @@
     </ion-card-header>
     
     <ion-card-content>
-      <p>{{savedText.content}}</p>
+      <p>{{helper.getSubString(savedText.content)}}</p>
     </ion-card-content>
   
     <ion-row>
@@ -27,19 +27,8 @@
          
         </button>
       </ion-col>
-      <ion-col>
-        <button ion-button icon-start clear small>
-            <ion-icon name="play"></ion-icon>
-            <div>Listen</div>
-        </button>
-      </ion-col>
+      
 
-      <ion-col>
-          <button ion-button icon-start clear small>
-              <ion-icon name="trash"></ion-icon>
-              <div>Delete</div>
-          </button>
-        </ion-col>
     
     </ion-row>
   

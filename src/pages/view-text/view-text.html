@@ -17,11 +17,13 @@
         
           <ion-row>
             <ion-col>
-              <button ion-button icon-start clear small>
-                <ion-icon name="cloud-upload"></ion-icon>
-                <div>Update</div>
+              <button ion-button icon-start clear small (click) = "startEdit()">
+                <ion-icon name="create"></ion-icon>
+                <div>Edit</div>
               </button>
             </ion-col>
+            
+        
             <ion-col>
               <button *ngIf = '!isPlaying' ion-button icon-start clear small (click) = "playText(savedText.content)">
                 <ion-icon name="play"></ion-icon>
@@ -32,7 +34,12 @@
                 <div>Stop</div>
               </button>
             </ion-col>
-            
+            <ion-col>
+                <button ion-button icon-start clear small (click) = "deletedSavedText(savedText.id)">
+                    <ion-icon name="trash"></ion-icon>
+                    <div>Delete</div>
+                </button>
+              </ion-col>
           </ion-row>
         
         </ion-card>
@@ -41,23 +48,26 @@
         <ion-card>
            
             <ion-card-content>
+              <span *ngIf="!editing">
               {{savedText.content}}
+              </span>
+              <span *ngIf="editing">
+                <form #commentEditForm="ngForm" (ngSubmit)="saveEdit()" autocomplete="off">
+                    <ion-textarea rows="6" placeholder="Update Comment"  name="commentEditField" id="commentEditField"  required [(ngModel)]="savedText.content" #commentField></ion-textarea>
+                    <button ion-button round small color="warning" (click)="cancleEdit()"> cancel</button>
+                    <button ion-button small round type="submit" color="secondary2" [disabled]="!commentEditForm.form.valid">
+                           Save
+                    </button>
+                </form>
+            </span>
             </ion-card-content>
-          </ion-card>
-        <ion-fab right bottom small>
-            <button ion-fab color="light"><ion-icon name="create"></ion-icon></button>
-
-              
-           
-          </ion-fab>
-
-          <ion-card>
+          
         
             <ion-row>
               <ion-col>
-                <button ion-button icon-start clear small>
-                  <ion-icon name="cloud-upload"></ion-icon>
-                  <div>Update</div>
+                <button ion-button icon-start clear small (click) = "startEdit()">
+                  <ion-icon name="create"></ion-icon>
+                  <div>Edit</div>
                 </button>
               </ion-col>
               <ion-col>
@@ -68,6 +78,13 @@
                 <button *ngIf = 'isPlaying' ion-button icon-start clear small (click) = "stopTextPlay()">
                   <ion-icon name="square"></ion-icon>
                   <div>Stop</div>
+                </button>
+              </ion-col>
+
+              <ion-col>
+                <button ion-button icon-start clear small (click) = "deletedSavedText(savedText.id)">
+                    <ion-icon name="trash"></ion-icon>
+                    <div>Delete</div>
                 </button>
               </ion-col>
               
