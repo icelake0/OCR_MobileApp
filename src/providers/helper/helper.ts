@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  AlertController, LoadingController, Platform } from 'ionic-angular';
+import moment from 'moment';
 
 /*
   Generated class for the HelperProvider provider.
@@ -39,6 +40,9 @@ export class HelperProvider {
       buttons: ['Dismiss'],
     });
     alert.present();
+  }
+  humanReadableTime(time){
+    return moment(time).format("Do MMMM, YYYY. HH:mm A") 
   }
 
 }

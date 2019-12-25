@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>File Name</ion-title>
+    <ion-title>{{helper.humanReadableTime(savedText.createdAt)}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -23,9 +23,13 @@
               </button>
             </ion-col>
             <ion-col>
-              <button ion-button icon-start clear small>
+              <button *ngIf = '!isPlaying' ion-button icon-start clear small (click) = "playText(savedText.content)">
                 <ion-icon name="play"></ion-icon>
                 <div>Listen</div>
+              </button>
+              <button *ngIf = 'isPlaying' ion-button icon-start clear small (click) = "stopTextPlay()">
+                <ion-icon name="square"></ion-icon>
+                <div>Stop</div>
               </button>
             </ion-col>
             
@@ -37,20 +41,7 @@
         <ion-card>
            
             <ion-card-content>
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-
-
-        
+              {{savedText.content}}
             </ion-card-content>
           </ion-card>
         <ion-fab right bottom small>
@@ -62,21 +53,25 @@
 
           <ion-card>
         
-              <ion-row>
-                <ion-col>
-                  <button ion-button icon-start clear small>
-                    <ion-icon name="cloud-upload"></ion-icon>
-                    <div>Update</div>
-                  </button>
-                </ion-col>
-                <ion-col>
-                  <button ion-button icon-start clear small>
-                    <ion-icon name="play"></ion-icon>
-                    <div>Listen</div>
-                  </button>
-                </ion-col>
-                
-              </ion-row>
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="cloud-upload"></ion-icon>
+                  <div>Update</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button *ngIf = '!isPlaying' ion-button icon-start clear small (click) = "playText(savedText.content)">
+                  <ion-icon name="play"></ion-icon>
+                  <div>Listen</div>
+                </button>
+                <button *ngIf = 'isPlaying' ion-button icon-start clear small (click) = "stopTextPlay()">
+                  <ion-icon name="square"></ion-icon>
+                  <div>Stop</div>
+                </button>
+              </ion-col>
+              
+            </ion-row>
             
             </ion-card>
 </ion-content>

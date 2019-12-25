@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ViewTextPage } from '../../pages/view-text/view-text'
 import { Storage } from '@ionic/storage';
+import { HelperProvider } from '../../providers/helper/helper'
 
 @Component({
   selector: 'page-home',
@@ -10,13 +11,12 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
 
   private savedTexts = [];
-  constructor(public navCtrl: NavController, private storage : Storage) {
+  constructor(public navCtrl: NavController, private storage : Storage, private helper : HelperProvider,) {
 
   }
 
-  openDetails() {
-   
-    this.navCtrl.push(ViewTextPage)
+  openDetails(savedText) {
+    this.navCtrl.push(ViewTextPage, {savedText})
   }
 
   ionViewWillEnter(){
@@ -25,6 +25,7 @@ export class HomePage {
         savedTexts = [];
       }
       this.savedTexts = savedTexts;
+      console.log('the save text', JSON.stringify(this.savedTexts));
     });
   }
 
