@@ -8,18 +8,18 @@
 
 <ion-content padding>
 
-  <ion-card>
+  <ion-card *ngFor="let savedText of savedTexts">
     <ion-card-header>
-    File Name
+    {{helper.humanReadableTime(savedText.createdAt)}}
     </ion-card-header>
     
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      <p>{{helper.getSubString(savedText.content)}}</p>
     </ion-card-content>
   
     <ion-row>
       <ion-col>
-        <button ion-button icon-start clear small (click)="openDetails()">
+        <button ion-button icon-start clear small (click)="openDetails(savedText)">
           <ion-icon name="eye"></ion-icon>
           <div>view</div>
           

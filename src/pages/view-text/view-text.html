@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>File Name</ion-title>
+    <ion-title>{{helper.humanReadableTime(savedText.createdAt)}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +17,7 @@
         
           <ion-row>
             <ion-col>
-              <button ion-button icon-start clear small>
+              <button ion-button icon-start clear small (click) = "startEdit()">
                 <ion-icon name="create"></ion-icon>
                 <div>Edit</div>
               </button>
@@ -25,13 +25,17 @@
             
         
             <ion-col>
-              <button ion-button icon-start clear small>
+              <button *ngIf = '!isPlaying' ion-button icon-start clear small (click) = "playText(savedText.content)">
                 <ion-icon name="play"></ion-icon>
                 <div>Listen</div>
               </button>
+              <button *ngIf = 'isPlaying' ion-button icon-start clear small (click) = "stopTextPlay()">
+                <ion-icon name="square"></ion-icon>
+                <div>Stop</div>
+              </button>
             </ion-col>
             <ion-col>
-                <button ion-button icon-start clear small>
+                <button ion-button icon-start clear small (click) = "deletedSavedText(savedText.id)">
                     <ion-icon name="trash"></ion-icon>
                     <div>Delete</div>
                 </button>
@@ -44,45 +48,47 @@
         <ion-card>
            
             <ion-card-content>
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-              The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-
-
-        
+              <span *ngIf="!editing">
+              {{savedText.content}}
+              </span>
+              <span *ngIf="editing">
+                <form #commentEditForm="ngForm" (ngSubmit)="saveEdit()" autocomplete="off">
+                    <ion-textarea rows="6" placeholder="Update Comment"  name="commentEditField" id="commentEditField"  required [(ngModel)]="savedText.content" #commentField></ion-textarea>
+                    <button ion-button round small color="warning" (click)="cancleEdit()"> cancel</button>
+                    <button ion-button small round type="submit" color="secondary2" [disabled]="!commentEditForm.form.valid">
+                           Save
+                    </button>
+                </form>
+            </span>
             </ion-card-content>
           
         
-              <ion-row>
-                <ion-col>
-                  <button ion-button icon-start clear small>
-                    <ion-icon name="create"></ion-icon>
-                    <div>Edit</div>
-                  </button>
-                </ion-col>
-               
-            
-                <ion-col>
-                  <button ion-button icon-start clear small>
-                    <ion-icon name="play"></ion-icon>
-                    <div>Listen</div>
-                  </button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button icon-start clear small>
-                        <ion-icon name="trash"></ion-icon>
-                        <div>Delete</div>
-                    </button>
-                  </ion-col>
-              </ion-row>
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-start clear small (click) = "startEdit()">
+                  <ion-icon name="create"></ion-icon>
+                  <div>Edit</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button *ngIf = '!isPlaying' ion-button icon-start clear small (click) = "playText(savedText.content)">
+                  <ion-icon name="play"></ion-icon>
+                  <div>Listen</div>
+                </button>
+                <button *ngIf = 'isPlaying' ion-button icon-start clear small (click) = "stopTextPlay()">
+                  <ion-icon name="square"></ion-icon>
+                  <div>Stop</div>
+                </button>
+              </ion-col>
+
+              <ion-col>
+                <button ion-button icon-start clear small (click) = "deletedSavedText(savedText.id)">
+                    <ion-icon name="trash"></ion-icon>
+                    <div>Delete</div>
+                </button>
+              </ion-col>
+              
+            </ion-row>
             
             </ion-card>
 </ion-content>
